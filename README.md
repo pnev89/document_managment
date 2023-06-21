@@ -1,4 +1,4 @@
-# Testing projec 
+# Testing projec
 
 This is just a simple example
 
@@ -49,12 +49,12 @@ poetry shell
     ```
 
 - Run mysql docker image
-    
+
     ```bash
     docker run mysql_db
     ```
 
-- Connect the mySql server from within the container 
+- Connect the mySql server from within the container
 (enter password provided with the command above)
 
     ```bash
@@ -63,7 +63,7 @@ poetry shell
 - To setup mysql do:
 
     ```bash
-    cd docker-entrypoint-initdb.d/  
+    cd docker-entrypoint-initdb.d/
     ```
 
     ```bash
@@ -71,7 +71,6 @@ poetry shell
     ```
 
 - The database [classicmodels](database/mysqlsampledatabase.sql) is already created
-
 
 
 
@@ -192,65 +191,3 @@ To install all the optional dependencies run:
 ```zsh
 poetry install --extras all
 ```
-
-##### Private repositories
-
-This repository has a private package dependency: `reachdesk-ds-prod`.
-We have two options to install this package, directly from git or
-through aws codeartifact. We choose the code artifact since this doesn't
-need to handle git hub credentials and can communicate directly in the
-AWS Databricks environment via IAM role.
-
-In the `pyproject.toml` the `reachdesk-ds-prod` package is tagged as `extra`.
-The reason for this is that when using `dbx` to run the `data-platform` jobs
-if this action was not set it will try to install the package on the target cluster.
-Since is necessary to provide a code artifact token in order to poetry have
-the authorization to access the codeartifact, the code launch
-(`dbx execute` or `dbx launch`) breaks because it cannot do the
-`aws codeartifact login` specified on the cluster `init_script`:
- `packages/upload_init_scripts.py`. Within the `extras` the
-`poetry build` excludes this package from the installation/wheel generation.
-More details will be described about how to install this in the Databricks runtime.
-
-To install this package for use locally via `databricks-connect` you can perform
-the following action:
-
-```zsh
-export POETRY_HTTP_BASIC_CODEARTIFACT_USERNAME=aws
-export POETRY_HTTP_BASIC_CODEARTIFACT_PASSWORD=$(aws codeartifact \
-    get-authorization-token \
-    --domain reachdesk \
-    --domain-owner 517025229481 \
-    --query authorizationToken \
-    --output text)
-```
-
-to export the necessary variables and
-
-```zsh
-poetry install --extras recsys
-```
-
-to install the required packages
-
-With this the package will be installed on the poetry environment.
-
-###### Package troubleshooting
-
-If you faced errors regarding the `reachdesk-ds-prod` hash execute
-the following commands:
-
-- Clean poetry artifact storage:
-
-    ``` zsh
-    rm -r ~/Library/Caches/pypoetry/artifacts
-    ```
-
-- Clear poetry cache
-
-    ``` zsh
-    poetry cache clear --all .
-    ```
-
-- Remove `poetry.lock`
-- Reinstall environment

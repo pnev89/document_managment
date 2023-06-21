@@ -64,4 +64,3 @@ start_infrastructure:
 	docker run -d -p 8080:8080 -p 5555:5555 -p 8793:8793 airflow-container
 	docker run -d -p 3306:3306 mysql-container
 	docker run -it --rm -p 4040:4040 -p 8081:8081 -p 7077:7077 spark-container
-

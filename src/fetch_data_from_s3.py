@@ -1,19 +1,20 @@
-
 """Fetches last data from S3 bucket"""
+from typing import List, Optional
+
 import boto3
-from typing import Optional, List
+
 from utilities import log
+
 
 class S3Data:
     """Mounts the bucket and reads data from S3"""
 
     def __init__(
-            self,
-            bucket_name: str,
-            mount_path: str,
-            username: Optional[List[str]] = None,
-            password: Optional[List[str]] = None,
-            
+        self,
+        bucket_name: str,
+        mount_path: str,
+        username: Optional[List[str]] = None,
+        password: Optional[List[str]] = None,
     ):
         """Creates an S3Data object"""
         if not isinstance(bucket_name, str):
@@ -25,15 +26,10 @@ class S3Data:
         if not (password is None or isinstance(password, str)):
             raise TypeError(f"password should be str not type {type(password)}")
 
-
-
         self.bucket_name = bucket_name
         self.mount_path = mount_path
         self.username = username
-        self.password = password 
-        
-
-
+        self.password = password
 
     def mount_bucket(self):
         """Mount AWS S3 bucket.
@@ -45,21 +41,20 @@ class S3Data:
         /mnt/:py:obj:`DATA_AWS_S3_BUCKET_ALIAS <datalakehouse.control.variables.DATA_AWS_S3_BUCKET_ALIAS>`.
 
         """
-        
+
         # Set the S3 bucket name and local mount path
-        bucket_name = self.bucket_name#'de-tech-assessment-2022'
-        mount_path = self.mount_path#'/Users/pedroneves/Downloads/data'
+        bucket_name = self.bucket_name  #'de-tech-assessment-2022'
+        mount_path = self.mount_path  #'/Users/pedroneves/Downloads/data'
 
         # Create a session using your AWS credentials
         session = boto3.Session()
 
         # Create an S3 client using the session
-        s3_client = session.client('s3')
+        s3_client = session.client("s3")
 
         # Mount the S3 bucket to the local mount path
-        s3_client.download_file(bucket_name, '', mount_path, ExtraArgs={'RequestPayer': 'requester'})
+        s3_client.download_file(
+            bucket_name, "", mount_path, ExtraArgs={"RequestPayer": "requester"}
+        )
 
-        log('Bucket mounted successfully at:', mount_path)
-
-
-
+        log("Bucket mounted successfully at:", mount_path)
