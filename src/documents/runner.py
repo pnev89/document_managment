@@ -1,4 +1,4 @@
-from parsing_documents import ParsingDocuments
+from src.documents._parsing_documents import ParsingDocuments
 
 
 
@@ -9,3 +9,5 @@ parser = ParsingDocuments(
         index="text_index")
 
 parser.parse_docs()
+
+

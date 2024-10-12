@@ -1,6 +1,6 @@
 from tika import parser
 from pathlib import Path
-from elasticsearch_interaction import ElasticsarchInteraction
+from src.documents._elasticsearch_interaction import ElasticsearchInteraction
 
 
 class ParsingDocuments:
@@ -16,7 +16,7 @@ class ParsingDocuments:
 
         docs_directory = Path(self.docs_directory)
 
-        es = ElasticsarchInteraction(
+        es = ElasticsearchInteraction(
             host=self.elasticSearch_host,
             port=self.elasticSearch_port
             )
@@ -44,6 +44,3 @@ class ParsingDocuments:
                 es.index_document(content=doc, index=self.index)
 
 
-
-        # Print the response
-        #print(response)

@@ -1,14 +1,4 @@
-"""Documnets."""
-from .parsing_documents import (
-    ParsingDocuments
-)
+"""Documents."""
+from src.documents._parsing_documents import ParsingDocuments 
+from src.documents._elasticsearch_interaction import Elasticsearch
 
-from .elasticsearch_interaction import (
-    ElasticsarchInteraction
-)
-
-
-__all__ = [
-    "ParsingDocuments",
-    "ElasticsarchInteraction"
-]
