@@ -1,6 +1,6 @@
-# Testing projec
+# Document management projec
 
-This is just a simple example
+This is some simple example of using haystack for document management
 
 ## Precommit Hooks
 
@@ -37,63 +37,6 @@ After that you need to start the environment. For that you should use:
 ```zsh
 poetry shell
 ```
-
-## How to setup the Mysql server
-
-- Install docker on your computer
-
-- Build docker image:
-
-    ```bash
-    docker build -t mysql_db -f database/Dockerfile .
-    ```
-
-- Run mysql docker image
-
-    ```bash
-    docker run mysql_db
-    ```
-
-- Connect the mySql server from within the container
-(enter password provided with the command above)
-
-    ```bash
-    bash-3.2$ docker exec -it [CONTAINER_ID] /bin/bash
-    ```
-- To setup mysql do:
-
-    ```bash
-    cd docker-entrypoint-initdb.d/
-    ```
-
-    ```bash
-    mysql -proot
-    ```
-
-- The database [classicmodels](database/mysqlsampledatabase.sql) is already created
-
-
-
-## How to run API
-- Install docker on your computer
-
-- Build docker image:
-
-    ```bash
-    docker build -f api/Dockerfile .
-    ```
-
-- Run docker container:
-
-    ```bash
-    docker run -p 3306:3306 IMAGE_ID
-    ```
-
-- Run docker container:
-
-    ```bash
-    docker run --env-file .env -p 8000:8000 IMAGE_ID
-    ```
 
 
 ## Precommit Hooks
