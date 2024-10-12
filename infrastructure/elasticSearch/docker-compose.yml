@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+    container_name: elasticsearch-container
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false  # Disable security for HTTP
+    ports:
+      - "9200:9200"  # HTTP port
+      - "9300:9300"  # Transport port
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data  # Optional: persistent data storage
+    networks:
+      - elasticsearch-net
+
+volumes:
+  elasticsearch_data:
+
+networks:
+  elasticsearch-net:
+    driver: bridge

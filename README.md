@@ -75,9 +75,6 @@ poetry shell
 
 
 ## How to run API
-
-To dockerize the `FastAPI` app is necessary to run the following steps:
-
 - Install docker on your computer
 
 - Build docker image:
@@ -92,57 +89,12 @@ To dockerize the `FastAPI` app is necessary to run the following steps:
     docker run -p 3306:3306 IMAGE_ID
     ```
 
-
-
-
-
-
-
-- Declare databricks environmental variables in a .env file.
-
-```bash
-    DATABRICKS_SERVER_HOSTNAME=dbc-5fd9856c-37d3.cloud.databricks.com
-    DATABRICKS_HTTP_PATH=sql/protocolv1/o/2943926958937924/1118-101136-z3jws8ur
-```
-
-Ask Data Team to provide a `DATABRICKS_TOKEN` for you.
-
 - Run docker container:
 
     ```bash
     docker run --env-file .env -p 8000:8000 IMAGE_ID
     ```
 
-The `.env` file must have the databricks credentials.
-
-If you will not use docker, and after you declare the environmental variables,
-you can just type:
-
-```bash
-uvicorn recsys_engine.api.recommender_system.main:app --host [HOST] --port [PORT]
-```
-
-If localhost, the Host is 0.0.0.0 or 127.0.0.1 and the port can be 8080
-
-- Execute POST request like:
-
-```bash
-curl -X 'POST' \
-  'http://0.0.0.0:8000/engages/simple_request/' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/json' \
-  -d '{"teams": ["bdr", "sales"], "country": ["United States", "United Kingdom"]}'
-```
-
-### Load Test API
-
-To test the API we are using [Locust](https://locust.io/).
-You can use the following command to launch it:
-
-```bash
-locust -f PATH_TO_LOAD_TESTS_FOLDER --host [API_HOST]:[API_PORT]
---exclude-tags [TAGS_TO_EXCLUDE] --class-picker
-```
 
 ## Precommit Hooks
 

@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  tika-server:
+    image: apache/tika
+    container_name: tika-server
+    ports:
+      - "9998:9998"  # Expose Tika server port
+    restart: unless-stopped  # Automatically restart unless stopped manually
