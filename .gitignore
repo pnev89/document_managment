@@ -220,6 +220,9 @@ poetry.toml
 # ruff
 .ruff_cache/
 
+# LSP config files
+pyrightconfig.json
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
@@ -239,7 +242,7 @@ poetry.toml
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/git,macos,dotenv,python,visualstudiocode
+### Documents
+resources/input_docs
 
-# Others
-.DS_Store/
+# End of https://www.toptal.com/developers/gitignore/api/git,macos,dotenv,python,visualstudiocode
